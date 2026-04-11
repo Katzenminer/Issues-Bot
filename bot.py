@@ -29,6 +29,7 @@ async def createissue(ctx):
     try:
         starter_message = await thread.fetch_message(thread.id)
         body = starter_message.content or "[No text content]"
+        body += f"\n\n[Discord Thread]({thread.jump_url})"
     except Exception:
         body = "[Could not fetch starter message]"
 
