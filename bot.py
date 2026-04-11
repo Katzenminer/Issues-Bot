@@ -30,6 +30,27 @@ async def createissue(ctx):
         starter_message = await thread.fetch_message(thread.id)
         body = starter_message.content or "[No text content]"
         body += f"\n\n[Discord Thread]({thread.jump_url})"
+
+        body_parts = []
+
+
+        body_parts.append(starter_message.content or "[No text content]")
+
+        # Attachments (images/files)
+        for attachment in starter_message.attachments:
+            body_parts.append(f"\n![attachment]({attachment.url})")
+
+        # Embeds (images from links)
+        for embed in starter_message.embeds:
+            if embed.image and embed.image.url:
+                body_parts.append(f"\n![embed]({embed.image.url})")
+            if embed.thumbnail and embed.thumbnail.url:
+                body_parts.append(f"\n![thumbnail]({embed.thumbnail.url})")
+
+
+        body_parts.append(f"\n\n[Discord Thread]({thread.jump_url})")
+
+        body = "\n".join(body_parts)
     except Exception:
         body = "[Could not fetch starter message]"
 
