@@ -4,7 +4,7 @@ import requests
 from discord.ext import commands
 
 # === CONFIG ===
-GITHUB_TOKEN = "YOUR_GITHUB_TOKEN"
+GITHUB_TOKEN = secret.gitToken #YOUR_GITHUB_TOKEN
 OWNER = "Katzenminer"
 REPO = "Issues-Bot"
 
@@ -57,7 +57,7 @@ async def createissue(ctx):
     # GitHub API request
     url = f"https://api.github.com/repos/{OWNER}/{REPO}/issues"
     headers = {
-        "Authorization": f"Bearer {secret.gitToken}",
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
         "Accept": "application/vnd.github+json"
     }
     data = {
